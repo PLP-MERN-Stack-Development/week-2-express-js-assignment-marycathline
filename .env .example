@@ -1,0 +1,7 @@
+# .env.example
+
+# API Key for authenticating protected routes
+API_KEY=your_api_key_here
+
+# Server Port (optional - defaults to 3000)
+PORT=3000

@@ -1,62 +1,132 @@
-# Express.js RESTful API Assignment
+# 🛍️ Product API - Express.js RESTful Service
 
-This assignment focuses on building a RESTful API using Express.js, implementing proper routing, middleware, and error handling.
+A fully functional RESTful API built using **Express.js**, supporting product management with features like **authentication**, **validation**, **error handling**, **pagination**, **search**, and **filtering**.
 
-## Assignment Overview
+---
 
-You will:
-1. Set up an Express.js server
-2. Create RESTful API routes for a product resource
-3. Implement custom middleware for logging, authentication, and validation
-4. Add comprehensive error handling
-5. Develop advanced features like filtering, pagination, and search
+## 🚀 How to Run the Server
 
-## Getting Started
+### 🔧 Requirements
+- Node.js v18+ installed
+- `npm` (comes with Node)
 
-1. Accept the GitHub Classroom assignment invitation
-2. Clone your personal repository that was created by GitHub Classroom
-3. Install dependencies:
-   ```
-   npm install
-   ```
-4. Run the server:
-   ```
-   npm start
-   ```
+### 📦 Installation Steps
 
-## Files Included
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/PLP-MERN-Stack-Development/week-2-express-js-assignment-marycathline.git
+   cd express-api-yourname
+Install dependencies:
 
-- `Week2-Assignment.md`: Detailed assignment instructions
-- `server.js`: Starter Express.js server file
-- `.env.example`: Example environment variables file
+bash
+npm install
 
-## Requirements
+Create a .env file based on .env.example:
 
-- Node.js (v18 or higher)
-- npm or yarn
-- Postman, Insomnia, or curl for API testing
+bash
+cp .env.example .env
 
-## API Endpoints
+Run the server:
 
-The API will have the following endpoints:
+bash
+node server.js
 
-- `GET /api/products`: Get all products
-- `GET /api/products/:id`: Get a specific product
-- `POST /api/products`: Create a new product
-- `PUT /api/products/:id`: Update a product
-- `DELETE /api/products/:id`: Delete a product
 
-## Submission
+🔐 Authentication
+This API uses a simple API key for authentication on protected routes.
 
-Your work will be automatically submitted when you push to your GitHub Classroom repository. Make sure to:
+Send the API key in the headers like this:
 
-1. Complete all the required API endpoints
-2. Implement the middleware and error handling
-3. Document your API in the README.md
-4. Include examples of requests and responses
+makefile
+x-api-key: your_api_key_here
 
-## Resources
+📄 GET /api/products
+Fetch all products
 
-- [Express.js Documentation](https://expressjs.com/)
-- [RESTful API Design Best Practices](https://restfulapi.net/)
-- [HTTP Status Codes](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) 
+Optional Query Params:
+
+category: Filter by category
+
+page: Page number (e.g., 1)
+
+limit: Items per page (e.g., 10)
+
+Example:
+
+bash
+/api/products?category=electronics&page=1&limit=5
+
+🔍 GET /api/products/search?name=term
+Search products by name
+
+Case-insensitive match
+
+📦 GET /api/products/:id
+Fetch a specific product by ID
+
+➕ POST /api/products
+Create a new product
+
+Requires API Key
+
+JSON Body:
+
+json
+{
+  "name": "iPhone 15",
+  "description": "Latest Apple phone",
+  "price": 999,
+  "category": "electronics",
+  "inStock": true
+}
+🔄 PUT /api/products/:id
+Update an existing product
+
+Requires API Key
+
+JSON Body: Same as POST
+
+❌ DELETE /api/products/:id
+Delete a product
+
+Requires API Key
+
+📊 GET /api/products/stats
+Get product statistics
+
+Returns product count by category
+
+Example Response:
+{
+  "electronics": 3,
+  "clothing": 5,
+  "books": 2
+}
+
+🧪 Example Requests
+Create Product (POST)
+POST /api/products
+x-api-key: secret123
+Content-Type: application/json
+
+{
+  "name": "Laptop",
+  "description": "High-end gaming laptop",
+  "price": 1999.99,
+  "category": "electronics",
+  "inStock": true
+}
+
+Search Product (GET)
+pgsql
+GET /api/products/search?name=laptop
+
+⚠️ Error Handling
+| Error Type           | Status Code | Description                |
+| -------------------- | ----------- | -------------------------- |
+| ValidationError      | 400         | Invalid input data         |
+| NotFoundError        | 404         | Product not found          |
+| Authentication Error | 401         | Invalid or missing API key |
+
+👨‍🏫 Author:Mary Cathline
+Built for educational purposes using Express.js.
